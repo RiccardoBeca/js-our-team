@@ -20,31 +20,31 @@ const memberCardArray = [
     foto: "img/wayne-barnett-founder-ceo.jpg",
     ruolo: "Founder & CEO"
   },
-  // {
-  //   nome: "",
-  //   foto: "img/wayne-barnett-founder-ceo.jpg",
-  //   ruolo: "Founder & CEO"
-  // },  {
-  //   nome: "",
-  //   foto: "img/wayne-barnett-founder-ceo.jpg",
-  //   ruolo: "Founder & CEO"
-  // },  {
-  //   nome: "",
-  //   foto: "img/wayne-barnett-founder-ceo.jpg",
-  //   ruolo: "Founder & CEO"
-  // },  {
-  //   nome: "",
-  //   foto: "img/wayne-barnett-founder-ceo.jpg",
-  //   ruolo: "Founder & CEO"
-  // },  {
-  //   nome: "",
-  //   foto: "img/wayne-barnett-founder-ceo.jpg",
-  //   ruolo: "Founder & CEO"
-  // },  {
-  //   nome: "",
-  //   foto: "img/wayne-barnett-founder-ceo.jpg",
-  //   ruolo: "Founder & CEO"
-  // }
+  {
+    nome: "Angela Carroll",
+    foto: "img/angela-caroll-chief-editor.jpg",
+    ruolo: "Chief Editor"
+  },
+  {
+    nome: "Angela Lopez",
+    foto: "img/angela-lopez-social-media-manager.jpg",
+    ruolo: "Social Media Manager"
+  },
+  {
+    nome: "Barbara Ramos",
+    foto:  "img/barbara-ramos-graphic-designer.jpg",
+    ruolo: "Graphic Designer"
+  },
+  {
+    nome: "Scott Estrada",
+    foto: "img/scott-estrada-developer.jpg",
+    ruolo: "Founder & CEO"
+  },
+  {
+    nome: "Walter Gordon",
+    foto: "img/walter-gordon-office-manager.jpg",
+    ruolo: "Founder & CEO"
+  }
 
 ];
 
@@ -71,21 +71,49 @@ for (let i in memberCardArray) {
 }
 
 
-
-
 // collego bottone
 
 let addUserButton = document.getElementById("addMemberButton");
+// devo usare una seconda funzione senza parametri per non ricevere errori undefined
+addUserButton.addEventListener("click", aggiungiClick);
 
-addUserButton.addEventListener("click", addMember);
-
-function addMember(nome, foto, ruolo) {
+function addMember(nome, ruolo, foto) {
   const newUser = {
     nome: nome,
+    ruolo: ruolo,
     foto: foto,
-    ruolo: ruolo
   }
-
+  // pusho il nuovo oggetto nell'array
   memberCardArray.push(newUser);
+  console.log(newUser,"nuovo-oggetto");
+  console.log(memberCardArray, "array-oggetti");
+  // ho reinserito tutto cio' che era nel ciclo per poterlo collegare alla funzione che poi evoco al click
+  let cardContainer = document.querySelector(".team-container");
+  cardContainer.innerHTML += 
+  `
+  <div class="team-card">
+    <div class="card-image">
+      <img
+        src="${foto}"
+        alt=""
+      />
+    </div>
+    <div class="card-text">
+      <h3>"${nome}"</h3>
+      <p>"${ruolo}"</p>
+    </div>
+  </div>
+  `
+}
+// uso una nuova funzione per chiamare addMember nell'addeventlistner al click e vado a prendere il valore dall'input usando .value
+function aggiungiClick() {
+  let nomeAggiunto = document.getElementById("name").value;
+  let ruoloAggiunto = document.getElementById("role").value;
+  let fotoAggiunta = document.getElementById("image").value;
+  console.log(nomeAggiunto, "valore nome");
+  console.log(ruoloAggiunto, "valore ruolo");
+  console.log(fotoAggiunta, "valore foto");
 
+  addMember(nomeAggiunto, ruoloAggiunto, fotoAggiunta);
+  
 }
